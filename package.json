@@ -6,11 +6,13 @@
   "scripts": {
     "prepublish": "selenium-standalone install",
     "pretest": "rm -rf allure-results",
-    "test": "wdio wdio.conf.js"
+    "test": "wdio wdio.conf.js",
+    "report": "allure report generate -o allure-report allure-results && allure report open -o allure-report"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "allure-cli": "^1.0.0",
     "expect": "^1.13.4",
     "mocha": "^2.3.4",
     "selenium-standalone": "^4.8.0",
