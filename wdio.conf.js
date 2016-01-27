@@ -29,8 +29,7 @@ exports.config = {
     // logLevel: 'silent',
     coloredLogs: true,
     screenshotPath: 'shots',
-    // baseUrl: 'https://github.com/webdriverio',
-    baseUrl: 'http://www.webdriver.io/',
+    baseUrl: 'https://github.com/webdriverio',
     waitforTimeout: 10000,
     framework: 'mocha',
 

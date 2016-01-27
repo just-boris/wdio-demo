@@ -1,36 +1,32 @@
 const webdriverio = require('webdriverio');
-const expect = require('expect');
+const expect = require('../util/matchers');
 
-describe('my webdriverio tests', function(){
+describe('Organization page', function(){
+    beforeEach(function() {
+        browser.url('/');
+    })
 
-    this.timeout(99999999);
-    var client = {};
-
-    before(function(done){
-            client = webdriverio.remote({ desiredCapabilities: {browserName: 'phantomjs'} });
-            client.init(done);
+    it('list repositiories', function() {
+        expect(browser.elements('.repo-list-item').value).toHaveLength(20);
     });
 
-    it('Github test',function(done) {
-        client
-            .url('https://github.com/')
-            .getElementSize('.header-logo-wordmark', function(err, result) {
-                assert(err === undefined);
-                assert(result.height === 26);
-                assert(result.width  === 89);
-            })
-            .getTitle(function(err, title) {
-                assert(err === undefined);
-                assert(title === 'GitHub · Where software is built');
-            })
-            .getCssProperty('a[href="/plans"]', 'color', function(err, result){
-                assert(err === undefined);
-                assert(result.value === 'rgba(64,120,192,1)');
-            })
-            .call(done);
+    it('open next page', function() {
+        browser.click('.next_page');
+        browser.waitForExist('.repo-list-item');
+        expect(browser.url().value).toBe('https://github.com/webdriverio?page=2');
+        expect(browser.elements('.repo-list-item').value).toHaveGreaterLength(2);
     });
 
-    after(function(done) {
-        client.end(done);
+    it('open project page', function() {
+        browser.click('.repo-list-item [href="/webdriverio/webdriverio"]');
+        browser.waitForExist('.repository-content');
+        expect(browser.url().value).toBe('https://github.com/webdriverio/webdriverio');
+        expect(browser.getText('.files .content').slice(1, 6)).toEqual([
+            'bin',
+            'docs',
+            'examples',
+            'lib',
+            'test'
+        ]);
     });
 });

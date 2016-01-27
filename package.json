@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "prepublish": "selenium-standalone install",
+    "pretest": "rm -rf allure-results",
     "test": "wdio wdio.conf.js"
   },
   "author": "",
