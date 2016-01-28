@@ -12,7 +12,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "allure-cli": "^1.0.0",
+    "allure-commandline": "^1.0.0",
     "expect": "^1.13.4",
     "mocha": "^2.3.4",
     "selenium-standalone": "^4.8.0",

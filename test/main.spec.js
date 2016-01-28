@@ -3,8 +3,11 @@ const expect = require('../util/matchers');
 
 describe('Organization page', function(){
     beforeEach(function() {
+        // force page reload
+        browser.url('about:blank');
         browser.url('/');
-    })
+        browser.waitForExist('.header');
+    });
 
     it('list repositiories', function() {
         expect(browser.elements('.repo-list-item').value).toHaveLength(20);
@@ -28,5 +31,11 @@ describe('Organization page', function(){
             'lib',
             'test'
         ]);
+    });
+
+    afterEach(function() {
+        if(this.currentTest.state !== "passed") {
+            browser.saveScreenshot();
+        }
     });
 });
