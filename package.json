@@ -16,8 +16,8 @@
     "expect": "^1.13.4",
     "mocha": "^2.3.4",
     "selenium-standalone": "^4.8.0",
-    "wdio-allure-reporter": "github:just-boris/wdio-allure-reporter#build",
+    "wdio-allure-reporter": "0.0.2",
     "wdio-mocha-framework": "^0.2.4",
-    "webdriverio": "github:just-boris/webdriverio#build"
+    "webdriverio": "^4.0.3"
   }
 }
