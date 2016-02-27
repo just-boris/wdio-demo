@@ -1,4 +1,4 @@
-# wdio-demo
+# wdio-demo [![Build Status](https://travis-ci.org/just-boris/wdio-demo.svg?branch=master)](https://travis-ci.org/just-boris/wdio-demo)
 A demo project of Webdriver.io tests with reporting by Allure
 
 
