@@ -6,7 +6,7 @@ describe('Organization page', function(){
         // force page reload
         browser.url('about:blank');
         browser.url('/');
-        browser.waitForExist('.header');
+        browser.waitForExist('.site-header');
     });
 
     it('list repositiories', function() {
@@ -25,11 +25,11 @@ describe('Organization page', function(){
         browser.waitForExist('.repository-content');
         expect(browser.getUrl()).toBe('https://github.com/webdriverio/webdriverio');
         expect(browser.getText('.files .content').slice(1, 6)).toEqual([
+            '.github',
             'bin',
             'docs',
             'examples',
-            'lib',
-            'test'
+            'lib'
         ]);
     });
 
