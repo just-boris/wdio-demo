@@ -1,23 +1,25 @@
 {
   "name": "wdio-demo",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prepublish": "selenium-standalone install",
     "pretest": "rm -rf allure-results",
     "test": "wdio wdio.conf.js",
-    "report": "allure report generate -o allure-report allure-results && allure report open -o allure-report"
+    "report": "allure serve allure-results"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
-    "allure-commandline": "1.4.22-1",
+    "@wdio/allure-reporter": "^5.16.10",
+    "@wdio/cli": "^5.16.10",
+    "@wdio/local-runner": "^5.16.10",
+    "@wdio/mocha-framework": "^5.16.10",
+    "@wdio/selenium-standalone-service": "^5.16.10",
+    "@wdio/spec-reporter": "^5.16.5",
+    "@wdio/sync": "^5.16.10",
+    "allure-commandline": "^2.13.0",
     "expect": "^1.13.4",
-    "mocha": "^2.3.4",
-    "selenium-standalone": "^5.1.0",
-    "wdio-allure-reporter": "0.0.2",
-    "wdio-mocha-framework": "^0.2.4",
-    "webdriverio": "^4.0.3"
+    "mocha": "^6.2.2"
   }
 }
