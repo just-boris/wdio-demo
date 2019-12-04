@@ -4,7 +4,7 @@ A demo project of Webdriver.io tests with reporting by Allure
 
 ## How to start
 
-1. Project requires Node.js 4+ and Java 1.7+
+1. Project requires Node.js and Java
 2. Clone this repository
 3. `npm install`
 

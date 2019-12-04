@@ -1,41 +1,32 @@
-const webdriverio = require('webdriverio');
 const expect = require('../util/matchers');
 
-describe('Organization page', function(){
-    beforeEach(function() {
-        // force page reload
-        browser.url('about:blank');
-        browser.url('/');
-        browser.waitForExist('.site-header');
-    });
+describe('Organization page', function() {
+  beforeEach(function() {
+    // force page reload
+    browser.url('about:blank');
+    browser.url('');
+    browser.$('.HeaderMenu').waitForExist();
+  });
 
-    it('list repositiories', function() {
-        expect(browser.elements('.repo-list-item').value).toHaveLength(20);
-    });
+  it('list repositories', function() {
+    expect(browser.$$('.repo-list .public')).toHaveLength(13);
+  });
 
-    it('open next page', function() {
-        browser.click('.next_page');
-        browser.waitForExist('.repo-list-item');
-        expect(browser.getUrl()).toBe('https://github.com/webdriverio?page=2');
-        expect(browser.elements('.repo-list-item').value).toHaveGreaterLength(2);
-    });
+  it('open project page', function() {
+    browser.$('.repo-list .public [href="/webdriverio/webdriverio"]').click();
+    browser.$('.repository-content').waitForExist();
+    expect(browser.getUrl()).toBe('https://github.com/webdriverio/webdriverio');
+    expect(
+      browser
+        .$$('.files .content')
+        .slice(1, 6)
+        .map(element => element.getText())
+    ).toEqual(['.github', 'docs', 'e2e', 'examples', 'packages']);
+  });
 
-    it('open project page', function() {
-        browser.click('.repo-list-item [href="/webdriverio/webdriverio"]');
-        browser.waitForExist('.repository-content');
-        expect(browser.getUrl()).toBe('https://github.com/webdriverio/webdriverio');
-        expect(browser.getText('.files .content').slice(1, 6)).toEqual([
-            '.github',
-            'bin',
-            'docs',
-            'examples',
-            'lib'
-        ]);
-    });
-
-    afterEach(function() {
-        if(this.currentTest.state !== "passed") {
-            browser.saveScreenshot();
-        }
-    });
+  afterEach(function() {
+    if (this.currentTest.state !== 'passed') {
+      browser.takeScreenshot();
+    }
+  });
 });

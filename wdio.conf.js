@@ -1,60 +1,26 @@
-const selenium = require('selenium-standalone');
-var seleniumServer;
-
 exports.config = {
+  runner: 'local',
 
-    /**
-     * server configurations
-     */
-    host: '0.0.0.0',
-    port: 4444,
+  specs: ['./test/*.spec.js'],
 
-    /**
-     * specify test files
-     */
-    specs: [
-        'test/*.spec.js'
-    ],
-
-    /**
-     * capabilities
-     */
-    capabilities: [{
-        browserName: 'firefox'
-    }],
-
-    /**
-     * test configurations
-     */
-    // logLevel: 'silent',
-    coloredLogs: true,
-    screenshotPath: 'shots',
-    baseUrl: 'https://github.com/webdriverio',
-    waitforTimeout: 10000,
-    framework: 'mocha',
-
-    reporters: ['dot', 'allure'],
-    reporterOptions: {
-        outputDir: './allure-results'
-    },
-
-    mochaOpts: {
-        ui: 'bdd'
-    },
-
-    onPrepare: function() {
-        return new Promise((resolve, reject) => {
-            selenium.start((err, process) => {
-                if(err) {
-                    return reject(err);
-                }
-                seleniumServer = process;
-                resolve(process);
-            })
-        });
-    },
-    onComplete: function() {
-        seleniumServer.kill();
+  capabilities: [
+    {
+      browserName: 'firefox'
     }
+  ],
+  logLevel: 'info',
 
+  baseUrl: 'https://github.com/webdriverio/',
+
+  waitforTimeout: 10000,
+  connectionRetryTimeout: 90000,
+  connectionRetryCount: 3,
+
+  services: ['selenium-standalone'],
+  framework: 'mocha',
+  reporters: ['spec', ['allure', { outputDir: 'allure-results' }]],
+  mochaOpts: {
+    ui: 'bdd',
+    timeout: 60000
+  }
 };
